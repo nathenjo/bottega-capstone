@@ -1,0 +1,23 @@
+@import './mixins.scss';
+@import './variables.scss';
+
+html {
+    font-size: 62.5%; // 1rem is 10px
+}
+*,
+*::after,
+*::before {
+    margin: 0;
+    padding: 0;
+}
+body {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    -webkit-tap-highlight-color: transparent;
+    font-family: 'Carter One', sans-serif;
+}
+
+@import './app.scss';
+@import './groups.scss';
+@import './navbar.scss';

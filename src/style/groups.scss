@@ -1,0 +1,26 @@
+.groups {
+    @include base-layout();
+    grid-column: middle-s/middle-e;
+    grid-row: content-s/content-e;
+    
+    display: grid;
+    grid-template-columns: [s] 1fr [e];
+    grid-template-rows: [create-group-s] 1fr [create-group-e group-list-s] 1fr [group-list-e];
+    justify-items: center;
+    .create-group {
+        grid-row: create-group-s/create-group-e;
+    }
+    .group-list {
+        grid-row: group-list-s/group-list-e;
+
+        &__group {
+
+        }
+        &__group-name {
+
+        }
+        &__group-button {
+
+        }
+    }
+}

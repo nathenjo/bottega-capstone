@@ -1,0 +1,16 @@
+.navbar {
+    width: 100vw;
+    // height: 60px;
+    background: black;
+    color: white;
+    grid-row: nav-s/nav-e;
+    @include base-layout();
+    & > * {
+        justify-self: center;
+    }
+    & button {
+        width: 100px;
+        height: 40px;
+        @include button-style();
+    }
+}

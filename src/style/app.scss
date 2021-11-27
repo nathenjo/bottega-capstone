@@ -1,0 +1,51 @@
+.app {
+    @include base-layout();
+    height: 400px;
+
+    &__form {
+        grid-column: middle-s/middle-e;
+        grid-row: content-s/content-e;
+
+        justify-self: center;
+        align-self: center;
+        display: grid;
+        grid-template-columns: [label-s] 200px [label-e input-s] 200px [input-e];
+        grid-template-rows: [email-s] 50px [email-e password-s] 50px [password-e button-s] 50px [button-e];
+        justify-items: center;
+        align-items: center;
+        font-size: 14px;
+        gap: 15px;
+        justify-content: center;
+        align-content: center;
+
+        &__email-label {
+            grid-row: email-s/email-e;
+            grid-column: label-s/label-e;
+            margin: 0;
+        }
+        &__email {
+            grid-row: email-s/email-e;
+            grid-column: input-s/input-e;
+
+        }
+        &__password-label {
+            grid-row: password-s/password-e;
+            grid-column: label-s/label-e;
+            margin: 0;
+        }
+        &__password {
+            grid-row: password-s/password-e;
+            grid-column: input-s/input-e;
+        }
+        &__submit {
+            align-self: center;
+            grid-row: button-s/button-e;
+            grid-column: 1/-1;
+            width: 100px;
+            @include button-style();
+            &:hover {
+                cursor: pointer;
+            }
+        }
+    }
+}

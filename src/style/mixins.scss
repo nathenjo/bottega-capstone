@@ -1,0 +1,11 @@
+@mixin base-layout {
+    display: grid;
+    grid-template-columns: [left-s] 200px [left-e middle-s] 1fr [middle-e right-s] 200px [right-e];
+    grid-template-rows: [nav-s] 60px [nav-e content-s] 1fr [content-e];
+}
+
+@mixin button-style {
+    background: $yellow;
+    border-radius: 15px;
+    font-size: 18px;
+}
