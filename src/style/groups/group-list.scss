@@ -1,6 +1,7 @@
 .group-list {
     grid-row: group-list-s/group-list-e;
     align-self: center;
+    height: 400px;
     &__group {
         display: flex;
         gap: 10px;

@@ -1,21 +1,18 @@
 import React, { useState } from 'react';
 
-export default function LoginForm({ Login }) {
-    const [details, setDetails]  = useState({email: '', password: ''})
-
-    const handleSubmit = (event) => {
-        event.preventDefault()
-        Login(details);
-    }
+export default function LoginForm(props) {
+    const {handleSubmit, emailValue, passwordValue, setEmailValue, setPasswordValue, loginStatus} = props;
        return(
-         <form onSubmit={handleSubmit}>
-            <label htmlFor='email'>Email</label>
-            <input type='email' name='email' id='email' onChange={e => setDetails({...details, email: e.target.value})} value={details.email} />
+        <div className='login'>
+        {!loginStatus ?
+        <form className='login__form' onSubmit={handleSubmit}>
+        <label className='login__form__email-label'>Email</label>
+        <input className='login__form__email' type='email' value={emailValue} onChange={e => setEmailValue(e.target.value)} placeholer='Email' />
 
-            <label htmlFor='password'>Password</label>
-            <input type='password' name='password' id='password' onChange={e => setDetails({...details, password: e.target.value})} value={details.password}/>
-
-            <input type='submit' value='Login' />
-         </form>
+        <label className='login__form__password-label'>Password</label>
+        <input className='login__form__password' type='password' value={passwordValue} onChange={e => setPasswordValue(e.target.value)} placeholer='Password' />
+        <input className='login__form__submit' type='submit' />
+        </form> : null}
+        </div>
        );
 }

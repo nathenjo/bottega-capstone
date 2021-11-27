@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
 export default function Messages(props) {
-        const { name, avatarImg } = props.user;
+        const { name, avatarImg, groups } = props.user;
 
        return(
          <div className='messages'>

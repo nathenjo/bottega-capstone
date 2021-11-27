@@ -5,9 +5,11 @@ export default function NavBar(props) {
 
        return(
           <div className='navbar'>
-              <button style={display} onClick={() => setPage('Groups')}>Groups</button>
-              <button style={display} onClick={() => setPage('Messages')}>Messages</button>
-              <button style={display} onClick={handleLogout}>Logout</button>
+            <div className='navbar-media-wrapper'>
+              <button className='navbar-media-wrapper__button' style={display} onClick={() => setPage('Groups')}>Groups</button>
+              <button className='navbar-media-wrapper__button' style={display} onClick={() => setPage('Messages')}>Messages</button>
+              <button className='navbar-media-wrapper__button' style={display} onClick={handleLogout}>Logout</button>
+            </div>
          </div>
        );
 }

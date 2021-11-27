@@ -1,0 +1,89 @@
+.new-user {
+    grid-row: content-s/content-e;
+    grid-column: middle-s/middle-e;
+    display: grid;
+    grid-template-rows: [form-s] 1fr [form-e error-s] 50px [error-e back-s] 40px [back-e];
+    &__error-message {
+        grid-row: error-s/error-e;
+        justify-self: center;
+        @include error-style();
+    }
+    &__back-button {
+        grid-row: back-s/back-e;
+        width: 100px;
+        justify-self: center;
+        @include button-style();
+    }
+    &__form {
+        grid-row: form-s/form-e;
+
+        justify-self: center;
+        align-self: center;
+        display: grid;
+        grid-template-columns: [label-s] 200px [label-e input-s] 200px [input-e];
+        grid-template-rows: [email-s] 50px [email-e password-s] 50px [password-e confirm-s] 50px [confirm-e button-s] 50px [button-e];
+        @media only screen and (max-width: 600px) {
+            display: flex;
+            flex-direction: column;
+            flex-wrap: wrap;
+        }
+        justify-items: center;
+        align-items: center;
+        font-size: 14px;
+        gap: 15px;
+        justify-content: center;
+        align-content: center;
+
+        &__email-label {
+            grid-row: email-s/email-e;
+            grid-column: label-s/label-e;
+            margin: 0;
+        }
+        &__email {
+            grid-row: email-s/email-e;
+            grid-column: input-s/input-e;
+            @include input-style();
+
+        }
+        &__password-label {
+            grid-row: password-s/password-e;
+            grid-column: label-s/label-e;
+            margin: 0;
+        }
+        &__password {
+            grid-row: password-s/password-e;
+            grid-column: input-s/input-e;
+            @include input-style();
+        }
+        &__confirm-label {
+            grid-row: confirm-s/confirm-e;
+            grid-column: label-s/label-e;
+            margin: 0;
+        }
+        &__confirm {
+            grid-row: confirm-s/confirm-e;
+            grid-column: input-s/input-e;
+            @include input-style();
+        }
+        &__submit {
+            align-self: center;
+            grid-row: button-s/button-e;
+            grid-column: 1/-1;
+            width: 100px;
+            @include button-style();
+            &:hover {
+                cursor: pointer;
+            }
+        }
+    }
+}
+
+.new-user-button {
+    grid-column: 1/-1;
+    grid-row: new-user-s/new-user-e;
+    justify-self: center;
+    &__button {
+        @include button-style();
+        padding: 4px;
+    }
+}

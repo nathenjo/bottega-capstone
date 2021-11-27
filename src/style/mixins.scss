@@ -1,7 +1,11 @@
 @mixin base-layout {
     display: grid;
-    grid-template-columns: [left-s] 200px [left-e middle-s] 1fr [middle-e right-s] 200px [right-e];
+    grid-template-columns: 200px [middle-s] 1fr [middle-e] 200px;
     grid-template-rows: [nav-s] 60px [nav-e content-s] 1fr [content-e];
+    @media only screen and (max-width: 600px) {
+        // transform: scale(0.75);
+        grid-template-columns:[middle-s] 1fr [middle-e];
+    }
 }
 
 @mixin button-style {
@@ -28,4 +32,9 @@
         box-shadow: inset 0px 0px 1px 1px $yellow;
         transform: scale(1.05)
     }
+}
+
+@mixin error-style {
+    font-size: 14px;
+    color: $red;
 }

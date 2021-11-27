@@ -4,6 +4,9 @@ import Groups from './groups/groups';
 import Messages from './messages/messages';
 import Home from './home';
 import NavBar from './navbar';
+import NewUser from './newUser';
+import LoginForm from './loginForm';
+import NewUserButton from './newUserButton';
 
 export default function App() {
 
@@ -18,15 +21,14 @@ export default function App() {
       avatarImg: 'https://www.kindpng.com/picc/m/482-4829270_geometric-animal-wolf-drawing-hd-png-download.png',
       email: 'sample@email.com',
       samplePassword: 'password',
-      groups: [
-        {groupOne: {
+      groups: {
+        groupOne: {
           id: Math.random(),
           name: 'Sample Group',
           adminUser: 'sample@email.com',
           users: [{sampleUser}]
         }
-        }]
-    }
+    }}
 
     const [page, setPage ] = useState('Home');
     const [user, setUser] = useState({email: '', password: ''});
@@ -72,18 +74,27 @@ export default function App() {
     return (
       <div className='app'>
             <NavBar display={display} handleLogout={handleLogout} setPage={setPage} />
-            {/* {page == 'Home' ? <div><Home loginStatus={loginStatus} /></div> : Home} */}
-            {!loginStatus ? 
-            <form className='app__form' onSubmit={handleSubmit}>
-              <label className='app__form__email-label'>Email</label>
-              <input className='app__form__email' type='email' value={emailValue} onChange={e => setEmailValue(e.target.value)} placeholer='Email' />
-
-              <label className='app__form__password-label'>Password</label>
-              <input className='app__form__password' type='password' value={passwordValue} onChange={e => setPasswordValue(e.target.value)} placeholer='Password' />
-              <input className='app__form__submit' type='submit' />
-            </form> : null}
+            {page == 'Home' ? <LoginForm
+              handleSubmit={handleSubmit}
+              emailValue={emailValue}
+              setEmailValue={setEmailValue}
+              passwordValue={passwordValue}
+              setPasswordValue={setPasswordValue}
+              loginStatus={loginStatus}
+            /> : null}
+            {page == 'Home' ? <NewUserButton loginStatus={loginStatus} setPage={setPage} /> : ''}
             {loginError ? <div className='app__error'>Error with login credentials, please try again</div> : null}
             {page == 'Groups' ? <Groups loginStatus={loginStatus} /> : Home}
+            {page == 'NewUser' ?
+              <NewUser
+                setPage={setPage}
+                setUser={setUser}
+                emailValue={emailValue}
+                setEmailValue={setEmailValue}
+                passwordValue={passwordValue}
+                setPasswordValue={setPasswordValue}
+                loginStatus={loginStatus}
+              /> : Home}
             {page == 'Messages' ? <Messages user={sampleUser} loginStatus={loginStatus} /> : Home}
       </div>
     );

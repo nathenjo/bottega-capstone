@@ -17,8 +17,13 @@ body {
     -webkit-tap-highlight-color: transparent;
     font-family: 'Carter One', sans-serif;
 }
+.app-wrapper {
+    margin: 0;
+}
 
 @import './app.scss';
+@import './loginForm.scss';
+@import './new-user.scss';
 @import './groups/groups.scss';
 @import './groups/create-group.scss';
 @import './groups/group-list.scss';

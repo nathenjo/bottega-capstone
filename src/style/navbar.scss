@@ -1,16 +1,20 @@
 .navbar {
-    width: 100vw;
+    display: grid;
+    grid-template-columns: 1fr;
     background: black;
     color: white;
     padding: 0;
+    grid-column: 1/-1;  
     grid-row: nav-s/nav-e;
-    @include base-layout();
-    & > * {
-        justify-self: center;
-    }
-    & button {
-        width: 100px;
-        height: 40px;
-        @include button-style();
+    .navbar-media-wrapper {
+        grid-column: 1/-1;
+        display: flex;
+        justify-content: space-around;
+
+        &__button {
+            width: 100px;
+            height: 40px;
+            @include button-style();
+        }
     }
 }

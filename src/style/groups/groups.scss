@@ -1,5 +1,4 @@
 .groups {
-    @include base-layout();
     margin-top: 20px;
     grid-column: middle-s/middle-e;
     grid-row: content-s/content-e;
@@ -8,6 +7,7 @@
     grid-template-columns: [s] 1fr [e];
     grid-template-rows: [create-group-s] 150px [create-group-e group-list-s] 1fr [group-list-e];
     justify-items: center;
+    gap: 35px;
     .create-group {
         grid-row: create-group-s/create-group-e;
         display: grid;
