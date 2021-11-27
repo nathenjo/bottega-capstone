@@ -40,7 +40,7 @@ export default function CreateGroup(props) {
               <input className='create-group-form__name-input' type='text' value={groupName} onChange={e => setGroupName(e.target.value)} placeholer='Group Name' />
 
               <label className='create-group-form__code-label'>Group Code</label>
-              <input className='create-group-form__code-input' type='text' value={groupCode.toUpperCase()} onChange={e => setGroupCode(e.target.value)} placeholer='Group Code' />
+              <input maxLength='7' className='create-group-form__code-input' type='text' value={groupCode.toUpperCase()} onChange={e => setGroupCode(e.target.value)} placeholer='Group Code' />
               <p className='create-group-form__subtitle'>This code will be used for others to join the group</p>
               <input className='create-group-form__submit' type='submit' />
             </form> : <div/>}
