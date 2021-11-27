@@ -6,7 +6,7 @@ export default function Groups(props) {
     const [groups, setGroups] = useState(['Group Name 1']);
 
     useEffect(() => {
-      console.log(props.listOfGroups);
+    
     }, [groups])
 
     const renderGroups = (listOfGroups) => {

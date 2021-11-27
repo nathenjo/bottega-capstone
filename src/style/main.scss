@@ -19,5 +19,7 @@ body {
 }
 
 @import './app.scss';
-@import './groups.scss';
+@import './groups/groups.scss';
+@import './groups/create-group.scss';
+@import './groups/group-list.scss';
 @import './navbar.scss';

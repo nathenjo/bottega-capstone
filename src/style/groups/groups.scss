@@ -1,0 +1,32 @@
+.groups {
+    @include base-layout();
+    margin-top: 20px;
+    grid-column: middle-s/middle-e;
+    grid-row: content-s/content-e;
+    
+    display: grid;
+    grid-template-columns: [s] 1fr [e];
+    grid-template-rows: [create-group-s] 150px [create-group-e group-list-s] 1fr [group-list-e];
+    justify-items: center;
+    .create-group {
+        grid-row: create-group-s/create-group-e;
+        display: grid;
+        grid-template-columns: [s] 1fr [e];
+        grid-template-rows: [button-s] 40px [button-e form-s] 1fr [form-e];
+        & > * {
+            grid-column: s/e;
+        }
+        &__create-button {
+            grid-row: button-s/button-s;
+            @include button-style();
+            padding: 5px;
+        }
+        &__back-button {
+            grid-row: button-s/button-s;
+            @include button-style();
+            margin-bottom: 4px;
+            width: 150px;
+            justify-self: center;
+        }
+    }
+}

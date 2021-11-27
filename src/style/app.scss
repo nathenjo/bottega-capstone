@@ -26,6 +26,7 @@
         &__email {
             grid-row: email-s/email-e;
             grid-column: input-s/input-e;
+            @include input-style();
 
         }
         &__password-label {
@@ -36,6 +37,7 @@
         &__password {
             grid-row: password-s/password-e;
             grid-column: input-s/input-e;
+            @include input-style();
         }
         &__submit {
             align-self: center;
@@ -47,5 +49,11 @@
                 cursor: pointer;
             }
         }
+    }
+    &__error {
+        font-size: 14px;
+        color: $red;
+        grid-column: 1/-1;
+        justify-self: center;
     }
 }

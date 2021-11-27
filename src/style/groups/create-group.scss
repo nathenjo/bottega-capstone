@@ -1,0 +1,37 @@
+.create-group-form {
+    grid-row: form-s/form-s;
+    display: grid;
+    height: 150px;
+    grid-template-columns: [s] 1fr [e];
+    grid-template-rows: [name-label-s] 20px [name-label-e name-input-s] 20px [name-input-e code-label-s] 20px [code-label-e code-input-s] 20px [code-input-e subtitle-s] 1fr [subtitle-e submit-s] 40px [submit-e];
+
+    &__name-label {
+        grid-row: name-label-s/name-label-e;
+        justify-self: center;
+        margin: 0;
+    }
+    &__name-input {
+        grid-row: name-input-s/name-input-e;
+        @include input-style();
+    }
+    &__code-label {
+        grid-row: code-label-s/code-label-e;
+        justify-self: center;
+        margin: 0;
+    }
+    &__code-input {
+        grid-row: code-input-s/code-input-e;
+        @include input-style();
+    }
+    &__subtitle {
+        grid-row: subtitle-s/subtitle-e;
+        grid-column: s/e;
+    }
+    &__submit {
+        @include button-style();
+        grid-row: submit-s/submit-e;
+        grid-column: s/e;
+        justify-self: center;
+        padding: 5px;
+    }
+}

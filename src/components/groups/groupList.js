@@ -12,7 +12,7 @@ export default function GroupList(props) {
              return (
                <div className='group-list__group' ref={groupRef} key={Math.random()}>
                  <div className='group-list__group-name'>{group}</div>
-                 <button className='group-list__group-button' onClick={props.loginStatus ? deleteGroup : null}>Remove Group</button>
+                 <button className='group-list__group-button' onClick={props.loginStatus ? deleteGroup : null}>Delete</button>
                 </div>
              )
            })}

@@ -1,0 +1,22 @@
+.group-list {
+    grid-row: group-list-s/group-list-e;
+    align-self: center;
+    &__group {
+        display: flex;
+        gap: 10px;
+        align-items: center;
+        justify-content: center;
+
+    }
+    &__group-name {
+        font-size: 18px;
+        &:hover {
+            cursor: pointer;
+        }
+    }
+    &__group-button {
+        @include button-style();
+        background-color: $red;
+        color: $off-white;
+    }
+}
