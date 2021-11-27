@@ -15,6 +15,7 @@ export default function App() {
     const sampleUser = {
       id: Math.random(),
       name: 'Sample User',
+      avatarImg: 'https://www.kindpng.com/picc/m/482-4829270_geometric-animal-wolf-drawing-hd-png-download.png',
       email: 'sample@email.com',
       samplePassword: 'password',
       groups: [
@@ -83,7 +84,7 @@ export default function App() {
             </form> : null}
             {loginError ? <div className='app__error'>Error with login credentials, please try again</div> : null}
             {page == 'Groups' ? <Groups loginStatus={loginStatus} /> : Home}
-            {page == 'Messages' ? <Messages loginStatus={loginStatus} /> : Home}
+            {page == 'Messages' ? <Messages user={sampleUser} loginStatus={loginStatus} /> : Home}
       </div>
     );
 }

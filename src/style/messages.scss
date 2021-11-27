@@ -1,0 +1,15 @@
+.messages {
+    height: 200px;
+    grid-row: content-s/content-e;
+    grid-column: middle-s/middle-e;
+    justify-self: center;
+    display: grid;
+    grid-template-rows: repeat(auto-fit, 1fr);
+    gap: 15px;
+    // overflow: hidden;
+}
+
+.user-avatar {
+    width: 50px;
+    height: 50px;
+}
