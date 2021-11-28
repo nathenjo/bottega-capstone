@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 
 import Groups from './groups/groups';
+import Profile from './profile';
 import Messages from './messages/messages';
 import Home from './home';
 import NavBar from './navbar';
@@ -96,6 +97,7 @@ export default function App() {
                 loginStatus={loginStatus}
               /> : Home}
             {page == 'Messages' ? <Messages user={sampleUser} loginStatus={loginStatus} /> : Home}
+            {page == 'Profile' ? <Profile user={sampleUser} loginStatus={loginStatus} /> : Home}
       </div>
     );
 }

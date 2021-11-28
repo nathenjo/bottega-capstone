@@ -1,0 +1,42 @@
+.profile {
+    grid-column: 1/-1;
+    justify-self: center;
+    display: grid;
+    grid-template-rows: 30px [image-s] 100px [image-e button-s] 40px [button-e name-s] 50px [name-e group-s] 150px [group-e];
+    grid-template-columns: 1fr;
+    gap: 5px;
+    & > * {
+        grid-column: 1/-1;
+    }
+    &__image {
+        grid-row: image-s/image-e;
+        height: 100px;
+        width: 100px;
+        z-index: 1;
+        &:hover {
+            cursor: pointer;
+        }
+    }
+    &__edit-icon {
+        z-index: 2;
+        position: absolute;
+        font-size: 16px;
+        color: white;
+        transform: translate(43px, 40px);
+        &:hover {
+            cursor: pointer;
+        }
+    }
+    &__button {
+        grid-row: button-s/button-e;
+        @include button-style();
+    }
+    &__user-name {
+        grid-row: name-s/name-e;
+        align-self: center;
+    }
+    &__joined-groups {
+        grid-row: group-s/group-e;
+        align-self: center;
+    }
+}
