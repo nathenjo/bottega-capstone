@@ -31,10 +31,10 @@ export default function Profile(props) {
        return(
          <div className='profile'>
             <img className='profile__image' onClick={handleClick} src={profilePicture} />
-            <i className='fas fa-pen profile__edit-icon'></i>
+            <i onClick={handleClick} className='fas fa-pen profile__edit-icon'></i>
             <button className='profile__button' type='submit' onClick={handleSubmit}>Save</button>
             <div className='profile__user-name'>Name: {name}</div>
-            <div className='profile__joined-groups'> Groups:{groups.groupOne.name}</div>
+            <div className='profile__joined-groups'> Groups: {groups.groupOne.name}</div>
          </div>
        );
 }

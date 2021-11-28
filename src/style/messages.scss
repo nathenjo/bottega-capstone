@@ -1,15 +1,63 @@
 .messages {
-    height: 200px;
-    grid-row: content-s/content-e;
+    @media only screen and (max-width: 600) {
+        margin: 20px;
+    }
     grid-column: middle-s/middle-e;
-    justify-self: center;
     display: grid;
-    grid-template-rows: repeat(auto-fit, 1fr);
+    grid-template-rows: [messages-s] 1fr [messages-e input-s] 30px [input-e];
     gap: 15px;
-    // overflow: hidden;
+    &__list {
+        height: 300px;
+        background-image: url('https://static.turbosquid.com/Preview/2014/08/01__16_44_19/parch_01.jpgef5d9ae1-b88e-4987-a95f-f4c838ee2d49Larger.jpg');
+        background-size: cover;
+        background-repeat: no-repeat;
+        justify-self: center;
+        width: 75%;
+        border-bottom: 1px $off-white solid;
+        border-left: 1px $off-white solid;
+        padding-left: 5px;
+        padding-right: 10px;
+        overflow-y: scroll;
+        overflow-wrap: break-word;
+    }
+    &__message {
+        background-color: $off-white;
+        margin: 4px;
+        font-size: 14px;
+        width: 100%;
+    }
 }
 
-.user-avatar {
-    width: 50px;
-    height: 50px;
+.add-message {
+    display: grid;
+    grid-row: input-s/input-e;
+
+    &__form {
+        display: grid;
+        grid-template-columns: [s] 1fr [e];
+        grid-template-rows: [input-s] 1fr [input-e button-s] 40px [button-e];
+        justify-content: space-around;
+        gap: 10px;
+        &__input {
+            grid-column: s/e;
+            grid-row: input-s/input-e;
+            font-size: 14px;
+            border-radius: 5px;
+            padding-left: 15px;
+            width: 50%;
+            justify-self: center;
+            &:focus {
+                border: none;
+                box-shadow: inset 0px 0px 5px 1px $yellow;
+            }
+        }
+        &__button {
+            @include button-style();
+            grid-column: s/e;
+            grid-row: button-s/button-e;
+            padding: 2px;
+            width: 100px;
+            justify-self: center;
+        }
+    }
 }
