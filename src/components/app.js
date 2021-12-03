@@ -29,7 +29,7 @@ export default function App() {
       axios.get("http://localhost:5000/fetch_users").then(response => {
         response.data.users.map(user => {
           if (user.email == emailValue && user.password == passwordValue) {
-            setUser({name: user.name, email: emailValue, password: passwordValue});
+            setUser({id: user.id, name: user.name, email: emailValue, password: passwordValue});
             setLoginStatus(true)
             setPage('Groups')
             setDisplay({display: 'initial'})
@@ -61,7 +61,7 @@ export default function App() {
             /> : null}
             {page == 'Home' ? <NewUserButton loginStatus={loginStatus} setPage={setPage} /> : ''}
             {loginError ? <div className='app__error'>Error with login credentials, please try again</div> : null}
-            {page == 'Groups' ? <Groups loginStatus={loginStatus} /> : Home}
+            {page == 'Groups' ? <Groups user={user} loginStatus={loginStatus} /> : Home}
             {page == 'NewUser' ?
               <NewUser
                 setPage={setPage}

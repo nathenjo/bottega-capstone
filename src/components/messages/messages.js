@@ -20,7 +20,7 @@ export default function Messages(props) {
             <div className='messages__list'>
               {renderMessages()}
             </div>
-            <AddMessage messagesList={messagesList} setMessagesList={setMessagesList} />
+            <AddMessage user={props.user} messagesList={messagesList} setMessagesList={setMessagesList} />
          </div>
        );
 }

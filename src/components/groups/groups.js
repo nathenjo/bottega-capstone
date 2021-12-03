@@ -1,13 +1,24 @@
+import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import CreateGroup from './createGroup';
 import GroupList from './groupList';
 
 export default function Groups(props) {
-    const [groups, setGroups] = useState(['Group Name 1']);
+    const { user } = props.user;
+    const [groups, setGroups] = useState([]);
+
+    const setGroupsList = () => {
+      axios.get("http://localhost:5000/groups").then(response => {
+        console.log(response.data.groups);
+        setGroups(response.data.groups)
+      }).catch(error => {
+        console.log(error);
+      })
+    }
 
     useEffect(() => {
-    
-    }, [groups])
+      setGroupsList()
+    }, [])
 
     const renderGroups = (listOfGroups) => {
       return listOfGroups.map(group => {
@@ -18,7 +29,7 @@ export default function Groups(props) {
        return(
          <div className='groups'>
              <CreateGroup updateGroups={setGroups} groups={groups} />
-             <GroupList loginStatus={props.loginStatus} groups={groups} />
+             <GroupList user={props.user} loginStatus={props.loginStatus} groups={groups} />
          </div>
        );
 }
