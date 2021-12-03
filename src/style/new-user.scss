@@ -21,7 +21,7 @@
         align-self: center;
         display: grid;
         grid-template-columns: [label-s] 200px [label-e input-s] 200px [input-e];
-        grid-template-rows: [email-s] 50px [email-e password-s] 50px [password-e confirm-s] 50px [confirm-e button-s] 50px [button-e];
+        grid-template-rows: [name-s] 50px [name-e email-s] 50px [email-e password-s] 50px [password-e confirm-s] 50px [confirm-e button-s] 50px [button-e];
         @media only screen and (max-width: 600px) {
             display: flex;
             flex-direction: column;
@@ -34,6 +34,17 @@
         justify-content: center;
         align-content: center;
 
+        &__name-label {
+            grid-row: name-s/name-e;
+            grid-column: label-s/label-e;
+            margin: 0;
+        }
+        &__name {
+            grid-row: name-s/name-e;
+            grid-column: input-s/input-e;
+            @include input-style();
+
+        }
         &__email-label {
             grid-row: email-s/email-e;
             grid-column: label-s/label-e;

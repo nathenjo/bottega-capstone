@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 
 import Groups from './groups/groups';
 import Profile from './profile';
@@ -11,30 +12,8 @@ import NewUserButton from './newUserButton';
 
 export default function App() {
 
-    const adminUser = {
-      email: 'admin@admin.com',
-      password: 'admin'
-    }
-
-    const sampleUser = {
-      id: Math.random(),
-      name: 'Sample User',
-      avatarImg: 'https://www.kindpng.com/picc/m/482-4829270_geometric-animal-wolf-drawing-hd-png-download.png',
-      email: 'sample@email.com',
-      samplePassword: 'password',
-      groups: {
-        groupOne: {
-          id: Math.random(),
-          name: 'Sample Group',
-          adminUser: 'sample@email.com',
-          users: [{sampleUser}]
-        }
-    }}
-
     const [page, setPage ] = useState('Home');
-    const [user, setUser] = useState({email: '', password: ''});
-    const email = user.email;
-    const password = user.password;
+    const [user, setUser] = useState({name: '', email: '', password: ''});
     const [loginStatus, setLoginStatus] = useState(false);
     const [loginError, setLoginError] = useState(false);
     const [ emailValue, setEmailValue ] = useState('');
@@ -43,24 +22,21 @@ export default function App() {
 
     useEffect(() => {
       setPage('Home')
-      checkLoginStatus()
     }, [user])
-
-    const checkLoginStatus = () => {
-      {if (email == adminUser.email && password == adminUser.password) {
-        setLoginStatus(true);
-        setLoginError(false);
-        setPage('Groups')
-        setDisplay({display: 'initial'})
-      }}
-    }
 
     const handleSubmit = (event) => {
       event.preventDefault();
-      setUser({email: emailValue, password: passwordValue});
-      {if (email !== adminUser.email || password !== adminUser.password) {
-        setLoginError(true)
-      }}
+      axios.get("http://localhost:5000/fetch_users").then(response => {
+        response.data.users.map(user => {
+          if (user.email == emailValue && user.password == passwordValue) {
+            setUser({name: user.name, email: emailValue, password: passwordValue});
+            setLoginStatus(true)
+            setPage('Groups')
+            setDisplay({display: 'initial'})
+            setLoginError(false)
+          }
+        })
+      })
       setEmailValue('');
       setPasswordValue('');
     }
@@ -95,9 +71,10 @@ export default function App() {
                 passwordValue={passwordValue}
                 setPasswordValue={setPasswordValue}
                 loginStatus={loginStatus}
+                setLoginStatus={setLoginStatus}
               /> : Home}
-            {page == 'Messages' ? <Messages user={sampleUser} loginStatus={loginStatus} /> : Home}
-            {page == 'Profile' ? <Profile user={sampleUser} loginStatus={loginStatus} /> : Home}
+            {page == 'Messages' ? <Messages user={user} loginStatus={loginStatus} /> : Home}
+            {page == 'Profile' ? <Profile user={user} loginStatus={loginStatus} /> : Home}
       </div>
     );
 }
