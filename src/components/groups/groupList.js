@@ -2,19 +2,22 @@ import React from 'react';
 import axios from 'axios';
 
 export default function GroupList(props) {
-    
-  const deleteGroup = () => {
-    axios.delete(`http://localhost:5000/groups/${group.id}`)
-  }
+
+  const { user, groups, setGroupDeleted } = props;
+
 
   return(
     <div className='group-list'>
-      {props.groups.map(group => {
-        if (group.user_id == props.user.id) {
+      {groups.map(group => {
+        if (group.user_id == user.id) {
         return (
           <div className='group-list__group' key={group.id}>
             <div className='group-list__group-name'>{group.name}</div>
-            <button className='group-list__group-button' onClick={deleteGroup}>Delete</button>
+            <button className='group-list__group-button' onClick={() => axios.delete(`http://localhost:5000/groups/${group.id}`).then(response => {
+              setGroupDeleted(true)
+            }).catch(error => {
+              console.log(error);
+            })}>Delete</button>
           </div>
         )}
       })}

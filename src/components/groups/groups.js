@@ -4,12 +4,13 @@ import CreateGroup from './createGroup';
 import GroupList from './groupList';
 
 export default function Groups(props) {
-    const { user } = props.user;
+    const { user } = props;
     const [groups, setGroups] = useState([]);
+    const [groupCreated, setGroupCreated] = useState(false);
+    const [groupDeleted, setGroupDeleted] = useState(false);
 
     const setGroupsList = () => {
       axios.get("http://localhost:5000/groups").then(response => {
-        console.log(response.data.groups);
         setGroups(response.data.groups)
       }).catch(error => {
         console.log(error);
@@ -18,18 +19,15 @@ export default function Groups(props) {
 
     useEffect(() => {
       setGroupsList()
-    }, [])
+      setGroupCreated(false);
+      setGroupDeleted(false);
+    }, [groupCreated, groupDeleted])
 
-    const renderGroups = (listOfGroups) => {
-      return listOfGroups.map(group => {
-        return group
-      })
-    }
 
        return(
          <div className='groups'>
-             <CreateGroup updateGroups={setGroups} groups={groups} />
-             <GroupList user={props.user} loginStatus={props.loginStatus} groups={groups} />
+             <CreateGroup setGroupCreated={setGroupCreated} user={props.user} updateGroups={setGroups} groups={groups} />
+             <GroupList setGroupDeleted={setGroupDeleted} user={user} groups={groups} />
          </div>
        );
 }

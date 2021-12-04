@@ -1,16 +1,24 @@
-import React, { useState } from 'react';
+import axios from 'axios';
+import React, { useEffect, useState } from 'react';
 
 import AddMessage from './addMessage';
 
 export default function Messages(props) {
-        const { name } = props.user;
+        const { user } = props;
         const [messagesList, setMessagesList] = useState([]);
 
+        useEffect(() => {
+          fetchMessages()
+        }, [])
+
+        const fetchMessages = () => {
+          axios.get("http://localhost:5000/messages")
+        }
+
         const renderMessages = () => {
-          // STYLE
           let messages = [];
           messages = messagesList.map((message, index) => {
-              return <div key={index} className={`messages__${index} messages__message`}>{props.user.name}{message}</div>
+              return <div key={index} className={`messages__${index} messages__message`}>{user.name}{message}</div>
           })
           return messages
         }

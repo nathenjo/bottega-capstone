@@ -1,19 +1,21 @@
+import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 
 export default function CreateGroup(props) {
+    const { updateGroups, groups, user, setGroupCreated } = props;
 
     const [display, setDisplay] = useState({display: 'none'})
     const [showForm, setShowForm] = useState(false);
     const [groupName, setGroupName] = useState('');
     const [groupCode, setGroupCode] = useState('');
 
-    useEffect(() => {
-        
-    }, [])
-
     const handleSubmit = (event) => {
         event.preventDefault();
-        props.updateGroups(props.groups.concat(groupName))
+        axios.post("http://localhost:5000/add_group", {name: groupName, code: groupCode, user_id: user.id}).then(response => {
+          setGroupCreated(true);
+        }).catch(error => {
+          console.log(error);
+        })
         setGroupName('')
         setGroupCode('')
         setDisplay({display: 'none'});
