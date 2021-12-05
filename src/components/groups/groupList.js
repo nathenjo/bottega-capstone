@@ -1,11 +1,14 @@
 import React from 'react';
-import axios from 'axios';
+import DeleteButton from './deleteButton';
 
 export default function GroupList(props) {
 
   const { user, groups, setGroupDeleted, setActiveGroup, setPage } = props;
 
-  // .addEventListener('click', handleSetPage()
+  const handleDisplayMessages = (group) => {
+    setActiveGroup(group);
+    setPage('Messages');
+  }
 
   return(
     <div className='group-list'>
@@ -13,12 +16,11 @@ export default function GroupList(props) {
         if (group.user_id == user.id) {
         return (
           <div className='group-list__group' key={group.id}>
-            <div onClick={() => setActiveGroup(group)} className='group-list__group-name'>{group.name}</div>
-            <button className='group-list__group-button' onClick={() => axios.delete(`http://localhost:5000/groups/${group.id}`).then(response => {
-              setGroupDeleted(true)
-            }).catch(error => {
-              console.log(error);
-            })}>Delete</button>
+            <div onClick={handleDisplayMessages} className='group-list__group-name'>{group.name}</div>
+            {group.adminUser == user.id ?
+              <DeleteButton group={group} text={'Delete Group'} setGroupDeleted={setGroupDeleted} />
+            :
+              <DeleteButton group={group} text={'Leave Group'} setGroupDeleted={setGroupDeleted} />}
           </div>
         )}
       })}

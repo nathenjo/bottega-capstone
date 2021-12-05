@@ -3,7 +3,6 @@ import axios from 'axios';
 
 import Groups from './groups/groups';
 import Profile from './profile';
-import Messages from './messages/messages';
 import Home from './home';
 import NavBar from './navbar';
 import NewUser from './newUser';
@@ -61,7 +60,7 @@ export default function App() {
             /> : null}
             {page == 'Home' ? <NewUserButton loginStatus={loginStatus} setPage={setPage} /> : ''}
             {loginError ? <div className='app__error'>Error with login credentials, please try again</div> : null}
-            {page == 'Groups' ? <Groups user={user} setPage={setPage} loginStatus={loginStatus} /> : Home}
+            {page == 'Groups' ? <Groups page={page} user={user} setPage={setPage} loginStatus={loginStatus} /> : Home}
             {page == 'NewUser' ?
               <NewUser
                 setPage={setPage}
@@ -74,7 +73,6 @@ export default function App() {
                 setLoginStatus={setLoginStatus}
               /> : Home}
             {page == 'Profile' ? <Profile user={user} loginStatus={loginStatus} /> : Home}
-            {page == 'Messages' ? <Messages user={user} loginStatus={loginStatus} /> : Home}
       </div>
     );
 }

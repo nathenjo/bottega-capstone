@@ -1,10 +1,11 @@
 .join-group {
     height: 200px;
     display: grid;
-    grid-template-columns: 1fr;
-    grid-template-rows: [label-s] 40px [label-e input-s] 40px [input-e button-s] 40px [button-e];
+    grid-template-columns: [s] 150px [e];
+    grid-template-rows: [label-s] 40px [label-e input-s] 40px [input-e button-s] 40px [button-e error-s] 1fr [error-e];
     gap: 10px;
     align-items: center;
+
     &__label {
         font-size: 16px;
         justify-self: center;
@@ -15,10 +16,19 @@
         border-radius: 10px;
         align-self: stretch;
         grid-row: input-s/input-e;
-        padding-left: 10px;
+        text-align: center;
+        padding-right: 10px;
     }
     &__button {
         @include button-style();
         grid-row: button-s/button-e;
+        width: 85px;
+        justify-self: center;
+    }
+    &__error {
+        @include error-style();
+        grid-row: error-s/error-e;
+        justify-self: center;
+        text-align: center;
     }
 }

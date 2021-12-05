@@ -4,7 +4,7 @@ import React, { useEffect, useState } from 'react';
 import AddMessage from './addMessage';
 
 export default function Messages(props) {
-        const { user } = props;
+        const { user, activeGroup } = props;
         const [messagesList, setMessagesList] = useState([]);
 
         const fetchMessages = () => {

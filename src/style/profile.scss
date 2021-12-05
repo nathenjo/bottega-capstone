@@ -1,21 +1,23 @@
 .profile {
+    margin-top: 40px;
     grid-column: 1/-1;
     justify-self: center;
     display: grid;
-    grid-template-rows: 30px [image-s] 100px [image-e button-s] 40px [button-e name-s] 50px [name-e group-s] 150px [group-e];
+    grid-template-rows: 30px [image-s] 100px [image-e button-s] 40px [button-e current-s] 100px [current-e name-s] 40px [name-e];
     grid-template-columns: 1fr;
-    gap: 5px;
+    gap: 25px;
     & > * {
         grid-column: 1/-1;
+        justify-self: center;
     }
     &__current-label {
-        transform: translateX(200px);
+        transform: translateY(-20px);
+        grid-row: current-s/current-e;
     }
     &__current-image {
-        grid-row: image-s/image-e;
+        grid-row: current-s/current-e;
         height: 100px;
         width: 100px;
-        transform: translateX(200px);
     }
     &__image-label {
         grid-row: image-s/image-e;
@@ -35,7 +37,7 @@
         position: absolute;
         font-size: 2rem;
         color: white;
-        transform: translate(42px, 70px);
+        transform: translateY(90px);
         &:hover {
             cursor: pointer;
         }
@@ -43,6 +45,7 @@
     &__button {
         grid-row: button-s/button-e;
         @include button-style();
+        justify-self: unset;
     }
     &__user-name {
         grid-row: name-s/name-e;

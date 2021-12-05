@@ -11,7 +11,7 @@ export default function CreateGroup(props) {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        axios.post("http://localhost:5000/add_group", {name: groupName, code: groupCode, user_id: user.id}).then(response => {
+        axios.post("http://localhost:5000/add_group", {name: groupName, code: groupCode, adminUser: user.id, user_id: user.id}).then(response => {
           setGroupCreated(true);
         }).catch(error => {
           console.log(error);
