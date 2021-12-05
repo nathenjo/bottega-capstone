@@ -3,7 +3,7 @@ import axios from 'axios';
 
 export default function AddMessage(props) {
 
-    const { messagesList, setMessagesList, user } = props;
+    const { messagesList, setMessagesList, user, activeGroup } = props;
 
     const [messageValue, setMessageValue] = useState('');
 
@@ -13,7 +13,7 @@ export default function AddMessage(props) {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        axios.post("http://localhost:5000/add_message", {text: messageValue, user_id: user.id})
+        axios.post("http://localhost:5000/add_message", {text: messageValue, user_id: user.id, group_id: activeGroup.id});
         setMessagesList(messagesList.concat(messageValue));
         setMessageValue('');
     }

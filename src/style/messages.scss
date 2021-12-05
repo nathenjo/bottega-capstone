@@ -2,6 +2,11 @@
     @media only screen and (max-width: 600) {
         margin: 20px;
     }
+
+    &__list::-webkit-scrollbar {
+    display: none;
+    }
+  
     grid-column: middle-s/middle-e;
     display: grid;
     grid-template-rows: [messages-s] 1fr [messages-e input-s] 30px [input-e];
@@ -19,6 +24,8 @@
         padding-right: 10px;
         overflow-y: scroll;
         overflow-wrap: break-word;
+        -ms-overflow-style: none;
+        scrollbar-width: none;
     }
     &__message {
         background-color: $off-white;

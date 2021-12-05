@@ -5,7 +5,7 @@
     
     display: grid;
     grid-template-columns: [s] 1fr [e];
-    grid-template-rows: [create-group-s] 150px [create-group-e group-list-s] 1fr [group-list-e];
+    grid-template-rows: [create-group-s] 150px [create-group-e group-list-s] 1fr [group-list-e join-group-s] 150px [join-group-e];
     justify-items: center;
     gap: 35px;
     .create-group {
@@ -28,5 +28,8 @@
             width: 150px;
             justify-self: center;
         }
+    }
+    .join-group {
+        grid-row: join-group-s/join-group-e;
     }
 }

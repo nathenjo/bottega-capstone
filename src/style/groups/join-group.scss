@@ -1,0 +1,24 @@
+.join-group {
+    height: 200px;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: [label-s] 40px [label-e input-s] 40px [input-e button-s] 40px [button-e];
+    gap: 10px;
+    align-items: center;
+    &__label {
+        font-size: 16px;
+        justify-self: center;
+        grid-row: label-s/label-e;
+    }
+    &__input {
+        @include input-style();
+        border-radius: 10px;
+        align-self: stretch;
+        grid-row: input-s/input-e;
+        padding-left: 10px;
+    }
+    &__button {
+        @include button-style();
+        grid-row: button-s/button-e;
+    }
+}

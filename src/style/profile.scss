@@ -8,6 +8,19 @@
     & > * {
         grid-column: 1/-1;
     }
+    &__current-label {
+        transform: translateX(200px);
+    }
+    &__current-image {
+        grid-row: image-s/image-e;
+        height: 100px;
+        width: 100px;
+        transform: translateX(200px);
+    }
+    &__image-label {
+        grid-row: image-s/image-e;
+        transform: translateY(-20px);
+    }
     &__image {
         grid-row: image-s/image-e;
         height: 100px;
@@ -34,9 +47,6 @@
     &__user-name {
         grid-row: name-s/name-e;
         align-self: center;
-    }
-    &__joined-groups {
-        grid-row: group-s/group-e;
-        align-self: center;
+        font-size: 18px;
     }
 }

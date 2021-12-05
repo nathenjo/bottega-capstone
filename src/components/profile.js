@@ -1,14 +1,18 @@
+import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 
 export default function Profile(props) {
-    const { name, groups } = props.user;
+    const { user } = props;
 
-    const [profilePicture, setProfilePicture] = useState('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQzK9ecwS0S77dPNOcGewc0KlAWXhO_BkRNsw&usqp=CAU');
+
+    const [profilePicture, setProfilePicture] = useState('');
+    const [currentProfilePicture, setCurrentProfilePicture] = useState(user.image_url);
     const [clickAmount, setClickAmount] = useState(1);
 
     useEffect(() => {
         changeProfile()
-    }, [clickAmount])
+        handleCurrentProfileImage()
+    }, [clickAmount, profilePicture])
 
     const changeProfile = (event) => {
          if(clickAmount % 3 == 0) {
@@ -24,17 +28,33 @@ export default function Profile(props) {
         setClickAmount(prevClickAmount => prevClickAmount + 1);
     }
 
+    const handleCurrentProfileImage = () => {
+        axios.get(`http://localhost:5000/users/${user.id}`).then(response => {
+            setCurrentProfilePicture(response.data.user.image_url);
+        }).catch(error => {
+            console.log(error);
+        })
+    }
+
     const handleSubmit = (event) => {
         event.preventDefault();
-        console.log('Image submitted to server');
+        axios.put(`http://localhost:5000/edit_user/${user.id}`, {image_url: profilePicture}).then(response => {
+            console.log(response);
+        }).catch(error => {
+            console.log(error);
+        })
+        handleCurrentProfileImage();
+        setClickAmount(1);
     }
        return(
          <div className='profile'>
+            <label className='profile__current-label'>Current Profile Pic</label>
+            <img className='profile__current-image' src={currentProfilePicture} />
+            <label className='profile__image-label'>Change Profile Pic</label>
             <img className='profile__image' onClick={handleClick} src={profilePicture} />
             <i onClick={handleClick} className='fas fa-pen profile__edit-icon'></i>
             <button className='profile__button' type='submit' onClick={handleSubmit}>Save</button>
-            <div className='profile__user-name'>Name: {name}</div>
-            <div className='profile__joined-groups'> Groups:</div>
+            <div className='profile__user-name'>Name: {user.name}</div>
          </div>
        );
 }
