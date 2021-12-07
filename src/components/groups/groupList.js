@@ -1,14 +1,11 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
+
 import DeleteButton from './deleteButton';
+import Group from './group';
 
 export default function GroupList(props) {
 
   const { user, groups, setGroupDeleted, setActiveGroup, setPage } = props;
-
-  const handleDisplayMessages = (group) => {
-    setActiveGroup(group);
-    setPage('Messages');
-  }
 
   return(
     <div className='group-list'>
@@ -16,7 +13,7 @@ export default function GroupList(props) {
         if (group.user_id == user.id) {
         return (
           <div className='group-list__group' key={group.id}>
-            <div onClick={handleDisplayMessages} className='group-list__group-name'>{group.name}</div>
+            <Group id={group.id} onClick={() => setActiveGroup(group) & setPage('Messages')} className='group-list__group-name' name={group.name} />
             {group.adminUser == user.id ?
               <DeleteButton group={group} text={'Delete Group'} setGroupDeleted={setGroupDeleted} />
             :
