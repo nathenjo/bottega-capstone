@@ -6,7 +6,24 @@ import AddMessage from './addMessage';
 export default function Messages(props) {
         const { user, activeGroup } = props;
         const [messagesList, setMessagesList] = useState([]);
-        const [messageAdded, setMessageAdded] = useState(false)
+        const [users, setUsers] = useState([]);
+        const [messageAdded, setMessageAdded] = useState(false);
+        const [messagesUserId, setMessagesUserId] = useState([]);
+
+        const handleMessagesUserId = () => {
+          axios.get("http://localhost:5000/messages").then(response => {
+            let userIdArray = [];
+            response.data.messages.map(message => {
+              userIdArray.push(message.user_id)
+              console.log(userIdArray);
+            })
+            setMessagesUserId(userIdArray.filter((c, index) => {
+              return userIdArray.indexOf(c) === index;
+          }));
+          }).catch(error => {
+            console.log(error);
+          })
+        }
 
         const fetchMessages = () => {
           axios.get("http://localhost:5000/messages").then(response => {
@@ -16,8 +33,18 @@ export default function Messages(props) {
           })
         }
 
+        const fetchUsers = () => {
+          axios.get("http://localhost:5000/users").then(response => {
+            setUsers(users.concat(response.data.users))
+          }).catch(error => {
+            console.log(error);
+          })
+        }
+
         useEffect(() => {
+          handleMessagesUserId()
           fetchMessages()
+          fetchUsers()
           setMessageAdded(false)
         }, [messageAdded])
 
@@ -29,7 +56,9 @@ export default function Messages(props) {
               {messagesList.map(message => {
                 return (
                   <div key={message.id} className='messages__list__message'>
-                    {message.text}
+                    <img className='messages__list__message__image' src={user.image_url} />
+                    <div className='messages__list__message__name'>{user.name}</div>
+                    <div className='messages__list__message__text'>{message.text}</div>
                   </div>
                 )
               })}

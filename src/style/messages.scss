@@ -47,12 +47,34 @@
         justify-content: center;
         align-items: center;
 
+
+
         &__message {
             grid-column: s/e;
             font-size: 16px;
             background-color: $off-white;
             padding: 5px 10px;
             border-radius: 30px;
+
+            display: grid;
+            grid-template-columns: [image-s] 50px [image-e text-s] 1fr [text-e];
+            grid-template-rows: [name-s] 30px [name-e text-s] 1fr [text-e];
+            gap: 0px 10px;
+            &__image {
+                width: 50px;
+                height: 50px;
+                border-radius: 40px;
+            }
+            &__name {
+                grid-column: text-s/text-e;
+                grid-row: name-s/name-e;
+                align-self: center;
+                text-decoration: underline;
+            }
+            &__text {
+                grid-column: text-s/text-e;
+                grid-row: text-s/text-e;
+            }
         }
     }
 }
