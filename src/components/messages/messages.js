@@ -2,28 +2,13 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 
 import AddMessage from './addMessage';
+import Message from './message';
 
 export default function Messages(props) {
         const { user, activeGroup } = props;
         const [messagesList, setMessagesList] = useState([]);
-        const [users, setUsers] = useState([]);
         const [messageAdded, setMessageAdded] = useState(false);
-        const [messagesUserId, setMessagesUserId] = useState([]);
-
-        const handleMessagesUserId = () => {
-          axios.get("http://localhost:5000/messages").then(response => {
-            let userIdArray = [];
-            response.data.messages.map(message => {
-              userIdArray.push(message.user_id)
-              console.log(userIdArray);
-            })
-            setMessagesUserId(userIdArray.filter((c, index) => {
-              return userIdArray.indexOf(c) === index;
-          }));
-          }).catch(error => {
-            console.log(error);
-          })
-        }
+        const [messageDeleted, setMessageDeleted] = useState(false);
 
         const fetchMessages = () => {
           axios.get("http://localhost:5000/messages").then(response => {
@@ -33,34 +18,35 @@ export default function Messages(props) {
           })
         }
 
-        const fetchUsers = () => {
-          axios.get("http://localhost:5000/users").then(response => {
-            setUsers(users.concat(response.data.users))
-          }).catch(error => {
-            console.log(error);
-          })
-        }
-
         useEffect(() => {
-          handleMessagesUserId()
           fetchMessages()
-          fetchUsers()
           setMessageAdded(false)
-        }, [messageAdded])
-
+          setMessageDeleted(false)
+        }, [messageAdded, messageDeleted])
 
        return(
          <div className='messages'>
            <div className='messages__title'>{activeGroup.name}</div>
+           {user.id == activeGroup.adminUser ? <div className='messages__admin'>You Have Admin Access. Click on Messages to Delete them</div> : null}
             <div className='messages__list'>
-              {messagesList.map(message => {
+              {messagesList.map((message, index) => {
+                if (message.group_id == activeGroup.code) {
+                  let individualUser = {}
+                  axios.get(`http://localhost:5000/users/${message.user_id}`).then(response => {
+                    let individualUser = response.data.user
+                    console.log(individualUser);
+                  })
                 return (
-                  <div key={message.id} className='messages__list__message'>
-                    <img className='messages__list__message__image' src={user.image_url} />
-                    <div className='messages__list__message__name'>{user.name}</div>
-                    <div className='messages__list__message__text'>{message.text}</div>
-                  </div>
-                )
+                  <Message
+                    key={message.id}
+                    setMessageDeleted={setMessageDeleted}
+                    image={user.image_url}
+                    name={individualUser.name}
+                    text={message.text}
+                    activeGroup={activeGroup}
+                    user={user}
+                  />
+                )}
               })}
             </div>
             <AddMessage

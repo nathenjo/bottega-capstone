@@ -22,8 +22,10 @@ export default function App() {
   const [activeGroup, setActiveGroup] = useState({});
 
   useEffect(() => {
-    setPage('Home')
-  }, [user])
+    if (loginStatus == true) {
+      setLoginError(false)
+    }
+  })
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -31,12 +33,16 @@ export default function App() {
       response.data.users.map(user => {
         if (user.email == emailValue && user.password == passwordValue) {
           setUser({id: user.id, name: user.name, email: emailValue, password: passwordValue, image_url: user.image_url});
-          setLoginStatus(true)
-          setPage('Groups')
-          setDisplay({display: 'initial'})
-          setLoginError(false)
+          setLoginStatus(true);
+          setPage('Groups');
+          setDisplay({display: 'initial'});
+          setLoginError(false);
+        } else {
+          setLoginError(true);
         }
       })
+    }).catch(error => {
+      alert('Error logging in, please try again')
     })
     setEmailValue('');
     setPasswordValue('');
@@ -46,7 +52,7 @@ export default function App() {
     setUser({});
     setLoginStatus(false);
     setDisplay({display: 'none'})
-    setPage(Home)
+    setPage('Home')
   }
 
   return (

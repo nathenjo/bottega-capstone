@@ -13,7 +13,7 @@ export default function AddMessage(props) {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        axios.post("http://localhost:5000/add_message", {text: messageValue, user_id: user.id, group_id: activeGroup.id}).catch(error => {
+        axios.post("http://localhost:5000/add_message", {text: messageValue, user_id: user.id, group_id: activeGroup.code}).catch(error => {
             alert('Error with submitting message, try again')
         });
         setMessagesList(messagesList.concat(messageValue));

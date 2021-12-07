@@ -6,7 +6,7 @@
     margin-top: 20px;
 
     display: grid;
-    grid-template-rows: [title-s] 30px [title-e list-s] 1fr [list-e add-message-s] 50px [add-message-e];
+    grid-template-rows: [title-s] 30px [title-e admin-s] 20px [admin-e list-s] 1fr [list-e add-message-s] 50px [add-message-e];
     grid-template-columns: [s] 1fr [e];
     gap: 15px;
 
@@ -19,6 +19,10 @@
         text-align: center;
         grid-row: title-s/title-e;
         font-size: 18px;
+    }
+    &__admin {
+        grid-row: admin-s/admin-e;
+        text-align: center;
     }
     &__list::-webkit-scrollbar {
         display: none;
