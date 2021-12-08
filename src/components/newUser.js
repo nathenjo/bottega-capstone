@@ -11,37 +11,36 @@ export default function NewUser(props) {
         passwordValue,
         setPasswordValue
     } = props;
+
     const [confirmPassword, setConfirmPassword] = useState('');
     const [nameValue, setNameValue] = useState('');
-    const [showError, setShowError] = useState(false);
+    const [showPasswordError, setShowPasswordError] = useState(false);
     const [showLoginError, setShowLoginError] = useState(false);
 
     useEffect(() => {
-        if (confirmPassword !== passwordValue) {
-            setShowError(true);
-        } else {
-            setShowError(false)
-        }
+        handlePasswordError()
     }, [confirmPassword])
+
+    const handlePasswordError = () => {
+        if (confirmPassword !== passwordValue) {
+            setShowPasswordError(true);
+        } else {
+            setShowPasswordError(false)
+        }
+    }
 
     const handleSubmit = (event) => {
         event.preventDefault();
         setUser({email: emailValue, password: passwordValue})
         axios.post("http://localhost:5000/add_user", {name: nameValue, email: emailValue, password: passwordValue})
         .then(response => {
-            if (response.data.message == `"user ${nameValue} has been created successfully."`) {
-                setLoginStatus(true)
-                setPage('Groups')
-            } else {
-                setShowLoginError(true)
-                setLoginStatus(false)
-            }
+            alert('Account Created Successfully')
+            setLoginStatus(true)
+            setPage('Groups')
         }).catch(error => {
-            console.log(error);
+            setShowLoginError(true);
         })
     }
-
-    // method="POST" action="http://localhost:5000/users"
 
        return(
         <div className='new-user'>
@@ -57,7 +56,7 @@ export default function NewUser(props) {
             <input className='new-user__form__confirm' type='password' value={confirmPassword} onChange={e => setConfirmPassword(e.target.value)} placeholer='Confirm Password' />
             <input className='new-user__form__submit' type='submit' />
             </form>
-            {showError ? <div className='new-user__error-message'>Passwords do not match</div> : null}
+            {showPasswordError ? <div className='new-user__error-message'>Passwords do not match</div> : null}
             {showLoginError ? <div className='new-user__error-message'>Error with credentials, try again</div> : null}
             <button onClick={() => setPage('Home')} className='new-user__back-button'>Back</button>
         </div>

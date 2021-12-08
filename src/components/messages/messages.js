@@ -31,17 +31,19 @@ export default function Messages(props) {
             <div className='messages__list'>
               {messagesList.map((message, index) => {
                 if (message.group_id == activeGroup.code) {
-                  let individualUser = {}
-                  axios.get(`http://localhost:5000/users/${message.user_id}`).then(response => {
-                    let individualUser = response.data.user
-                    console.log(individualUser);
-                  })
+                  var userName = 'Hello';
+                  const renderUserName = (id) => {
+                    axios.get(`http://localhost:5000/users/${id}`).then(response => {
+                      var userName = response.data.user.name;
+                    })
+                    return <div>{userName}</div>
+                  }
                 return (
                   <Message
                     key={message.id}
+                    id={message.id}
+                    userId={message.user_id}
                     setMessageDeleted={setMessageDeleted}
-                    image={user.image_url}
-                    name={individualUser.name}
                     text={message.text}
                     activeGroup={activeGroup}
                     user={user}

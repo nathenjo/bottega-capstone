@@ -5,6 +5,7 @@ import Groups from './groups/groups';
 import Profile from './profile';
 import Home from './home';
 import NavBar from './navbar';
+import SmallNavbar from './smallNavbar';
 import NewUser from './newUser';
 import LoginForm from './loginForm';
 import NewUserButton from './newUserButton';
@@ -18,14 +19,19 @@ export default function App() {
   const [loginError, setLoginError] = useState(false);
   const [ emailValue, setEmailValue ] = useState('');
   const [ passwordValue, setPasswordValue ] = useState('');
-  const [display, setDisplay] = useState({display: 'none'})
   const [activeGroup, setActiveGroup] = useState({});
+  const [screenSize, setScreenSize] = useState(window.innerWidth);
 
   useEffect(() => {
+    window.addEventListener('resize', handleScreenSize)
     if (loginStatus == true) {
       setLoginError(false)
     }
-  })
+  }, [loginStatus])
+
+  const handleScreenSize = () => {
+    setScreenSize(window.innerHeight)
+  }
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -35,14 +41,11 @@ export default function App() {
           setUser({id: user.id, name: user.name, email: emailValue, password: passwordValue, image_url: user.image_url});
           setLoginStatus(true);
           setPage('Groups');
-          setDisplay({display: 'initial'});
           setLoginError(false);
-        } else {
-          setLoginError(true);
         }
       })
     }).catch(error => {
-      alert('Error logging in, please try again')
+      setLoginError(true);
     })
     setEmailValue('');
     setPasswordValue('');
@@ -51,13 +54,14 @@ export default function App() {
   const handleLogout = () => {
     setUser({});
     setLoginStatus(false);
-    setDisplay({display: 'none'})
     setPage('Home')
   }
 
   return (
     <div className='app'>
-          <NavBar display={display} handleLogout={handleLogout} setPage={setPage} />
+          {screenSize > 600 ? <NavBar loginStatus={loginStatus} setPage={setPage} handleLogout={handleLogout}/>
+          :
+          <SmallNavbar loginStatus={loginStatus} setPage={setPage} handleLogout={handleLogout} /> }
           {page == 'Home' ? <LoginForm
             handleSubmit={handleSubmit}
             emailValue={emailValue}
