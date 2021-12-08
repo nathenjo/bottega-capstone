@@ -11,6 +11,7 @@ export default function Profile(props) {
 
     useEffect(() => {
         changeProfile()
+        handleCurrentProfileImage()
     }, [clickAmount])
 
     const changeProfile = (event) => {
@@ -30,7 +31,6 @@ export default function Profile(props) {
     const handleCurrentProfileImage = () => {
         axios.get(`http://localhost:5000/users/${user.id}`).then(response => {
             setCurrentProfilePicture(response.data.user.image_url);
-            setClickAmount(1);
         }).catch(error => {
             console.log(error);
         })
@@ -40,6 +40,7 @@ export default function Profile(props) {
         event.preventDefault();
         axios.put(`http://localhost:5000/edit_user/${user.id}`, {image_url: profilePicture}).then(response => {
             handleCurrentProfileImage();
+            setClickAmount(1);
         }).catch(error => {
             console.log(error);
         })
