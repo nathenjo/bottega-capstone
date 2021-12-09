@@ -35,7 +35,7 @@ export default function App() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    axios.get("http://localhost:5000/users").then(response => {
+    axios.get("https://nwj-chat-app-api.herokuapp.com/users").then(response => {
       response.data.users.map(user => {
         if (user.email == emailValue && user.password == passwordValue) {
           setUser({id: user.id, name: user.name, email: emailValue, password: passwordValue, image_url: user.image_url});

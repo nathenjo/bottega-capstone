@@ -9,7 +9,7 @@ export default function Message(props) {
 
     const handleDeleteMessage = () => {
         if (user.id == activeGroup.adminUser) {
-            axios.delete(`http://localhost:5000/messages/${id}`).then(response => {
+            axios.delete(`https://nwj-chat-app-api.herokuapp.com/messages/${id}`).then(response => {
                 alert('Message deleted successfuly')
                 setMessageDeleted(true);
             }).catch(error => {
@@ -19,7 +19,7 @@ export default function Message(props) {
     }
 
     const handleUserInfo = () => {
-        axios.get(`http://localhost:5000/users/${userId}`).then(response => {
+        axios.get(`https://nwj-chat-app-api.herokuapp.com/users/${userId}`).then(response => {
             setUserName(response.data.user.name);
             setUserProfilePic(response.data.user.image_url);
           })

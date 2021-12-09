@@ -15,7 +15,7 @@ export default function JoinGroup(props) {
     const handleSubmit = () => {
         groups.map(group => {
             if (group.code == groupCode) {
-                axios.post("http://localhost:5000/add_group", {name: group.name, code: group.code, adminUser: group.adminUser, user_id: user.id}).then(response => {
+                axios.post("https://nwj-chat-app-api.herokuapp.com/add_group", {name: group.name, code: group.code, adminUser: group.adminUser, user_id: user.id}).then(response => {
                     setGroupJoined(true);
                     setErrorMessage(false);
                     setGroupCode('');

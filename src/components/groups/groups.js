@@ -14,7 +14,7 @@ export default function Groups(props) {
   const [groupJoined, setGroupJoined] = useState(false);
 
   const setGroupsList = () => {
-    axios.get("http://localhost:5000/groups").then(response => {
+    axios.get("https://nwj-chat-app-api.herokuapp.com/groups").then(response => {
       setGroups(response.data.groups)
     }).catch(error => {
       console.log(error);

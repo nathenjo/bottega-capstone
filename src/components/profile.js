@@ -29,7 +29,7 @@ export default function Profile(props) {
     }
 
     const handleCurrentProfileImage = () => {
-        axios.get(`http://localhost:5000/users/${user.id}`).then(response => {
+        axios.get(`https://nwj-chat-app-api.herokuapp.com/users/${user.id}`).then(response => {
             setCurrentProfilePicture(response.data.user.image_url);
         }).catch(error => {
             console.log(error);
@@ -38,7 +38,7 @@ export default function Profile(props) {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        axios.put(`http://localhost:5000/edit_user/${user.id}`, {image_url: profilePicture}).then(response => {
+        axios.put(`https://nwj-chat-app-api.herokuapp.com/edit_user/${user.id}`, {image_url: profilePicture}).then(response => {
             handleCurrentProfileImage();
             setClickAmount(1);
         }).catch(error => {

@@ -6,7 +6,7 @@ export default function DeleteButton(props) {
     const { setGroupDeleted, text, group } = props;
 
        return(
-        <button className='group-list__group-button' onClick={() => axios.delete(`http://localhost:5000/groups/${group.id}`).then(response => {
+        <button className='group-list__group-button' onClick={() => axios.delete(`https://nwj-chat-app-api.herokuapp.com/groups/${group.id}`).then(response => {
             setGroupDeleted(true)
           }).catch(error => {
             console.log(error);

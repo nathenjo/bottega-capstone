@@ -11,7 +11,7 @@ export default function Messages(props) {
         const [messageDeleted, setMessageDeleted] = useState(false);
 
         const fetchMessages = () => {
-          axios.get("http://localhost:5000/messages").then(response => {
+          axios.get("https://nwj-chat-app-api.herokuapp.com//messages").then(response => {
             setMessagesList(response.data.messages)
           }).catch(error => {
             console.log(error);
@@ -33,7 +33,7 @@ export default function Messages(props) {
                 if (message.group_id == activeGroup.code) {
                   var userName = 'Hello';
                   const renderUserName = (id) => {
-                    axios.get(`http://localhost:5000/users/${id}`).then(response => {
+                    axios.get(`https://nwj-chat-app-api.herokuapp.com//users/${id}`).then(response => {
                       var userName = response.data.user.name;
                     })
                     return <div>{userName}</div>

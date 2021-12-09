@@ -32,7 +32,7 @@ export default function NewUser(props) {
     const handleSubmit = (event) => {
         event.preventDefault();
         setUser({email: emailValue, password: passwordValue})
-        axios.post("http://localhost:5000/add_user", {name: nameValue, email: emailValue, password: passwordValue})
+        axios.post("https://nwj-chat-app-api.herokuapp.com/add_user", {name: nameValue, email: emailValue, password: passwordValue})
         .then(response => {
             alert('Account Created Successfully')
             setLoginStatus(true)
