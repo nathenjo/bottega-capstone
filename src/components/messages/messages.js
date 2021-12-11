@@ -3,16 +3,19 @@ import React, { useEffect, useState } from 'react';
 
 import AddMessage from './addMessage';
 import Message from './message';
+import LoadingIcon from '../loadingIcon';
 
 export default function Messages(props) {
         const { user, activeGroup } = props;
         const [messagesList, setMessagesList] = useState([]);
         const [messageAdded, setMessageAdded] = useState(false);
         const [messageDeleted, setMessageDeleted] = useState(false);
+        const [loading, setLoading] = useState(true);
 
         const fetchMessages = () => {
           axios.get("https://nwj-chat-app-api.herokuapp.com//messages").then(response => {
             setMessagesList(response.data.messages)
+            setLoading(false);
           }).catch(error => {
             console.log(error);
           })
@@ -20,8 +23,9 @@ export default function Messages(props) {
 
         useEffect(() => {
           fetchMessages()
-          setMessageAdded(false)
-          setMessageDeleted(false)
+          setLoading(true);
+          setMessageAdded(false);
+          setMessageDeleted(false);
         }, [messageAdded, messageDeleted])
 
        return(
@@ -31,13 +35,6 @@ export default function Messages(props) {
             <div className='messages__list'>
               {messagesList.map((message, index) => {
                 if (message.group_id == activeGroup.code) {
-                  var userName = 'Hello';
-                  const renderUserName = (id) => {
-                    axios.get(`https://nwj-chat-app-api.herokuapp.com//users/${id}`).then(response => {
-                      var userName = response.data.user.name;
-                    })
-                    return <div>{userName}</div>
-                  }
                 return (
                   <Message
                     key={message.id}
@@ -51,6 +48,7 @@ export default function Messages(props) {
                 )}
               })}
             </div>
+            {loading ? <LoadingIcon /> : null}
             <AddMessage
               setMessageAdded={setMessageAdded}
               activeGroup={activeGroup}

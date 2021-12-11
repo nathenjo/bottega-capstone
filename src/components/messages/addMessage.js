@@ -13,12 +13,13 @@ export default function AddMessage(props) {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        axios.post("https://nwj-chat-app-api.herokuapp.com/add_message", {text: messageValue, user_id: user.id, group_id: activeGroup.code}).catch(error => {
+        axios.post("https://nwj-chat-app-api.herokuapp.com/add_message", {text: messageValue, user_id: user.id, group_id: activeGroup.code}).then(response => {
+            setMessagesList(messagesList.concat(messageValue));
+            setMessageValue('');
+            setMessageAdded(true);
+        }).catch(error => {
             alert('Error with submitting message, try again')
         });
-        setMessagesList(messagesList.concat(messageValue));
-        setMessageValue('');
-        setMessageAdded(true)
     }
 
        return(

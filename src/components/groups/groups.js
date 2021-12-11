@@ -4,6 +4,7 @@ import axios from 'axios';
 import CreateGroup from './createGroup';
 import GroupList from './groupList';
 import JoinGroup from './joinGroup';
+import LoadingIcon from '../loadingIcon';
 
 export default function Groups(props) {
   const { user, setPage, setActiveGroup } = props;
@@ -12,12 +13,14 @@ export default function Groups(props) {
   const [groupCreated, setGroupCreated] = useState(false);
   const [groupDeleted, setGroupDeleted] = useState(false);
   const [groupJoined, setGroupJoined] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   const setGroupsList = () => {
     axios.get("https://nwj-chat-app-api.herokuapp.com/groups").then(response => {
       setGroups(response.data.groups)
+      setLoading(false)
     }).catch(error => {
-      console.log(error);
+      alert('Error loading groups, come back another time')
     })
   }
 
@@ -36,7 +39,12 @@ export default function Groups(props) {
           updateGroups={setGroups}
           groups={groups}
         />
-        <JoinGroup user={user} groups={groups} setGroupJoined={setGroupJoined} />
+        {loading ? <LoadingIcon /> : null}
+        <JoinGroup
+          user={user}
+          groups={groups}
+          setGroupJoined={setGroupJoined}
+        />
         <GroupList
           setPage={setPage}
           setActiveGroup={setActiveGroup}

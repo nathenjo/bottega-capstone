@@ -21,8 +21,10 @@ body {
     margin: 0;
 }
 
+
 @import './app.scss';
 @import './loginForm.scss';
+@import './loading-icon.scss';
 @import './new-user.scss';
 @import './groups/groups.scss';
 @import './groups/create-group.scss';

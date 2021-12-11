@@ -1,6 +1,8 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 
+import LoadingIcon from './loadingIcon';
+
 export default function Profile(props) {
     const { user } = props;
 
@@ -8,9 +10,13 @@ export default function Profile(props) {
     const [profilePicture, setProfilePicture] = useState('');
     const [currentProfilePicture, setCurrentProfilePicture] = useState(user.image_url);
     const [clickAmount, setClickAmount] = useState(1);
+    const [loading, setLoading] = useState(true);
+    const [changeSubmit, setChangeSubmit] = useState(false);
 
     useEffect(() => {
         changeProfile()
+        setLoading(true);
+        setChangeSubmit(false);
         handleCurrentProfileImage()
     }, [clickAmount])
 
@@ -38,8 +44,10 @@ export default function Profile(props) {
 
     const handleSubmit = (event) => {
         event.preventDefault();
+        setChangeSubmit(true);
         axios.put(`https://nwj-chat-app-api.herokuapp.com/edit_user/${user.id}`, {image_url: profilePicture}).then(response => {
             handleCurrentProfileImage();
+            setLoading(false);
             setClickAmount(1);
         }).catch(error => {
             console.log(error);
@@ -54,6 +62,7 @@ export default function Profile(props) {
             <i onClick={handleClick} className='fas fa-pen profile__edit-icon'></i>
             <button className='profile__button' type='submit' onClick={handleSubmit}>Save</button>
             <div className='profile__user-name'>Name: {user.name}</div>
+            {loading && changeSubmit ? <LoadingIcon /> : null}
          </div>
        );
 }

@@ -27,7 +27,7 @@ export default function Message(props) {
 
     useEffect(() => {
         handleUserInfo()
-    })
+    }, [])
 
        return(
          <div onClick={handleDeleteMessage} className='messages__list__message'>

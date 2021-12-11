@@ -1,6 +1,8 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 
+import LoadingIcon from './loadingIcon';
+
 export default function NewUser(props) {
     const {
         setPage,
@@ -16,6 +18,8 @@ export default function NewUser(props) {
     const [nameValue, setNameValue] = useState('');
     const [showPasswordError, setShowPasswordError] = useState(false);
     const [showLoginError, setShowLoginError] = useState(false);
+    const [loading, setLoading] = useState(true);
+    const [formSubmit, setFormSubmit] = useState(false);
 
     useEffect(() => {
         handlePasswordError()
@@ -31,12 +35,12 @@ export default function NewUser(props) {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        setUser({email: emailValue, password: passwordValue})
         axios.post("https://nwj-chat-app-api.herokuapp.com/add_user", {name: nameValue, email: emailValue, password: passwordValue})
         .then(response => {
             alert('Account Created Successfully')
-            setLoginStatus(true)
-            setPage('Groups')
+            setFormSubmit(true)
+            setPage('Home')
+            setLoading(false)
         }).catch(error => {
             setShowLoginError(true);
         })
@@ -59,6 +63,7 @@ export default function NewUser(props) {
             {showPasswordError ? <div className='new-user__error-message'>Passwords do not match</div> : null}
             {showLoginError ? <div className='new-user__error-message'>Error with credentials, try again</div> : null}
             <button onClick={() => setPage('Home')} className='new-user__back-button'>Back</button>
+            {formSubmit && loading ? <LoadingIcon /> : null}
         </div>
        );
 }

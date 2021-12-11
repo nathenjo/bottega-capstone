@@ -59,6 +59,7 @@
             background-color: $off-white;
             padding: 5px 10px;
             border-radius: 30px;
+            cursor: pointer;
 
             display: grid;
             grid-template-columns: [image-s] 50px [image-e text-s] 1fr [text-e];
