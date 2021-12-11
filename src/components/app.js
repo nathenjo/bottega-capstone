@@ -34,7 +34,7 @@ export default function App() {
   }, [loginStatus])
 
   const handleScreenSize = () => {
-    setScreenSize(window.innerHeight)
+    setScreenSize(window.innerWidth)
   }
 
   const handleSubmit = (event) => {

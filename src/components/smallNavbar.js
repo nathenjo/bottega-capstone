@@ -14,7 +14,7 @@ export default function SmallNavbar(props) {
     }
 
     return(
-      <div className='navbar'>
+      <div className='app-navbar'>
         {loginStatus ? 
         <div className='navbar-sidebar'>
         <i onClick={handleDisplayClick} class="fas fa-chevron-circle-down"></i>

@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 
 export default function NavBar(props) {
   const { loginStatus, setPage, handleLogout } = props;
     return(
-      <div className='navbar'>
+      <div className='app-navbar'>
         {loginStatus ? 
         <div className='navbar-media-wrapper'>
           <button className='navbar-media-wrapper__button' onClick={() => setPage('Groups')}>Groups</button>

@@ -1,4 +1,4 @@
-.navbar {
+.app-navbar {
     display: grid;
     grid-template-columns: 1fr;
     background: black;
@@ -6,6 +6,7 @@
     padding: 0;
     grid-column: 1/-1;  
     grid-row: nav-s/nav-e;
+    align-items: center;
     .navbar-media-wrapper {
         grid-column: 1/-1;
         display: flex;
